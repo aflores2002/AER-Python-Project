@@ -1,0 +1,13 @@
+import pandas as pd
+
+data = ["Metals"]
+
+original = pd.read_csv("sampleDataset.csv", index_col=False)
+
+filtered = original[original['Industry Sector'].isin(data)]
+
+filtered.to_csv("Filtered sampleDataset.csv")
+
+print(filtered)
+
+# This is a possible solution, must implement new data when given Motec CSV files
