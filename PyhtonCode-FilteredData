@@ -10,5 +10,5 @@ filtered.to_csv("Filtered sampleDataset.csv")
 
 print(filtered)
 
-# This is a possible solution, must implement new data when given Motec CSV files
+# This is a stepping stone to a possible solution, must implement new data when given Motec CSV files
 # This code extracts all pieces of data from the sample that are in the Metals Industry Sector
