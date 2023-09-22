@@ -1,2 +1,6 @@
-msg = "Hello World"
-print(msg)
+import csv
+
+with open("IHMStefanini_industrial_safety_and_health_database.csv", 'r') as file:
+    csvreader = csv.reader(file)
+    for row in csvreader:
+        print(row)
