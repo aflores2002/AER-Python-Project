@@ -1,14 +1,20 @@
 import pandas as pd
 
-data = ["Metals"]                                            # Used to choose what data to extract
+# Used to choose what data to extract
+data = ["Metals"]
+country = ["Country_01"]
 
-original = pd.read_csv("sampleDataset.csv", index_col=False) # Reads original CSV file
+# Reads original CSV file
+original = pd.read_csv("sampleDataset.csv", index_col=False)
 
-filtered = original[original['Industry Sector'].isin(data)]  # Filter to only show data which is in Metals Industry Sector
+# Filter to only show data which is in Metals Industry Sector and in Country_01
+filtered = original[(original['Industry Sector'].isin(data)) & (original['Countries'].isin(country))]
 
-filtered.to_csv("Filtered sampleDataset.csv")                # makes filtered data into a CSV file located in project folder
+# makes filtered data into a CSV file
+filtered.to_csv("Filtered sampleDataset.csv")
 
-print(filtered)                                              # prints filtered data
+# prints filtered data
+print(filtered)
 
 # This is a stepping stone to a possible solution, must implement new data when given Motec CSV files
 # This code extracts all pieces of data from the sample that are in the Metals Industry Sector
