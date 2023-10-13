@@ -1,19 +1,25 @@
 import pandas as pd
+import numpy as np
+import matplotlib as plt
+import plotly.express as px
 
-# Used to choose what data to extract
-data = ["Metals"]
-country = ["Country_01"]
+# Read the CSV file and skip the first 13 rows
+filtered = pd.read_csv("Sam-DataLog-9-24.csv", skiprows=13, usecols=['Time', 'D1 DC Bus Voltage', 'D4 DC Bus Current'])
 
-# Reads original CSV file
-original = pd.read_csv("sampleDataset.csv", index_col=False)
+# Convert columns to numeric data types
+filtered['D1 DC Bus Voltage'] = pd.to_numeric(filtered['D1 DC Bus Voltage'], errors='coerce')
+filtered['D4 DC Bus Current'] = pd.to_numeric(filtered['D4 DC Bus Current'], errors='coerce')
 
-# Filter to only show data which is in Metals Industry Sector and in Country_01
-filtered = original[(original['Industry Sector'].isin(data)) & (original['Countries'].isin(country))]
+# Calculate wattage
+filtered['Wattage'] = filtered['D1 DC Bus Voltage'] * filtered['D4 DC Bus Current']
 
-# makes filtered data into a CSV file
-filtered.to_csv("Filtered sampleDataset.csv")
+# Save the filtered data to a new CSV file
+filtered.to_csv("filteredDataWithWatts.csv", index=False)
 
-# prints filtered data
+# Plot Time vs. Wattage
+fig = px.line(filtered, x='Time', y='Wattage', title='Time vs. Wattage')
+fig.show()
+
 print(filtered)
 
-# This is a stepping stone to a possible solution, must implement new data when given Motec CSV files
+# Voltage under 250 -> Car is OFF
